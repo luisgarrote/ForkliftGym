@@ -1,0 +1,16 @@
+{
+  "elements": [],
+  "goal": [
+    0.0,
+    3.0
+  ],
+  "meta": {},
+  "name": "empty_arena",
+  "spawn": [
+    0.0,
+    -3.0,
+    0.0
+  ],
+  "walls": [],
+  "world_size": 10.0
+}

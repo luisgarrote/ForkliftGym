@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forklift-gym"
+version = "0.1.0"
+description = "Gymnasium forklift material handling with pallets, stacks and moving traffic"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Luis Garrote"}]
+dependencies = ["gymnasium>=1.0,<2", "numpy>=1.23,<3", "matplotlib>=3.6,<4",
+                "pillow>=9", "pettingzoo>=1.24,<2"]
+
+[project.optional-dependencies]
+sb3 = ["stable-baselines3>=2.7,<3"]
+
+[project.scripts]
+forklift-lab = "forklift_gym.cli:main"
+
+[project.urls]
+Repository = "https://github.com/luisgarrote/ForkliftGym"
+Issues = "https://github.com/luisgarrote/ForkliftGym/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+forklift_gym = ["maps/*.json"]
