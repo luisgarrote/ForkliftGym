@@ -1,0 +1,35 @@
+{
+  "controller": "scripted",
+  "seed": 7,
+  "dt": 0.08,
+  "steps": 172,
+  "delivered": 2,
+  "events": [
+    {
+      "step": 11,
+      "time_seconds": 0.88,
+      "picked_box": "pallet_A",
+      "delivered_box": null
+    },
+    {
+      "step": 86,
+      "time_seconds": 6.88,
+      "picked_box": null,
+      "delivered_box": "pallet_A"
+    },
+    {
+      "step": 122,
+      "time_seconds": 9.76,
+      "picked_box": "pallet_B",
+      "delivered_box": null
+    },
+    {
+      "step": 172,
+      "time_seconds": 13.76,
+      "picked_box": null,
+      "delivered_box": "pallet_B"
+    }
+  ],
+  "frame_stride": 3,
+  "normal_playback_speed": 2
+}

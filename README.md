@@ -4,7 +4,11 @@ A lightweight **Gymnasium forklift environment** for reinforcement-learning clas
 Drive, steer, lift pallets, carry them to a delivery area, and stack them. Includes
 oriented pallets, source stacks, shelves, lidar, and optional moving robot traffic.
 
-![Forklift warehouse](docs/images/forklift.png)
+![Forklift picks up, carries and stacks two pallets](docs/images/pallet_pickup.gif)
+
+Scripted demonstration recorded from the simulator: approach, catch, lift, carry,
+lower and stack two pallets. Playback is accelerated 2x, with pauses at pickup and
+delivery. This illustrates the environment mechanics; it is not a trained PPO policy.
 
 ## Installation
 
@@ -185,6 +189,7 @@ After cloning and installing:
 python examples/random_rollout.py --output outputs/random.png
 python examples/random_rollout.py --traffic 2 --obstacles 2 --output outputs/random_traffic.png
 python examples/moving_agents.py --output outputs/traffic.gif
+python examples/pallet_pickup.py --output outputs/pallet_pickup.gif
 python examples/custom_scenario.py
 python examples/train_ppo.py --steps 100000
 ```
