@@ -1,0 +1,1485 @@
+{
+  "version": 1,
+  "description": "Five frozen four-pallet layouts, each paired with the same geometry and 1 or 2 scripted traffic robots. Evaluation only; do not tune on these cases.",
+  "cases": [
+    {
+      "id": "normal_1",
+      "group": "normal",
+      "seed": 20001,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 4.153697797062336,
+              "y_lo": -1.4571664104026167,
+              "x_hi": 4.909048648643009,
+              "y_hi": -0.12142760798910301
+            },
+            {
+              "x_lo": 0.07133898058835786,
+              "y_lo": 3.688938758070664,
+              "x_hi": 1.226207748820212,
+              "y_hi": 4.65812526316301
+            }
+          ],
+          "spawn": [
+            1.8463808298110962,
+            1.404921054840088,
+            -3.109769344329834
+          ],
+          "goal": [
+            3.3564071655273438,
+            -5.369410514831543
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -4.221951961517334,
+              2.8878002166748047
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -4.221951961517334,
+              2.8878002166748047
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              0.6721423864364624,
+              -1.602465271949768
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              0.6721423864364624,
+              -1.602465271949768
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            3.3564071655273438,
+            -4.800000190734863
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "normal_2",
+      "group": "normal",
+      "seed": 20002,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 1.9729271017933623,
+              "y_lo": -4.432385191398383,
+              "x_hi": 3.300256326605333,
+              "y_hi": -3.7149458445646224
+            },
+            {
+              "x_lo": 1.5146349922477786,
+              "y_lo": 1.8714011560424568,
+              "x_hi": 2.306662945199473,
+              "y_hi": 2.95539717210431
+            }
+          ],
+          "spawn": [
+            4.932585716247559,
+            4.2979960441589355,
+            -1.9958020448684692
+          ],
+          "goal": [
+            -2.605036497116089,
+            3.269683361053467
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -3.772657632827759,
+              -0.1960487961769104
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -3.772657632827759,
+              -0.1960487961769104
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -0.9977006912231445,
+              2.3165814876556396
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -0.9977006912231445,
+              2.3165814876556396
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            -2.605036497116089,
+            3.269683361053467
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "normal_3",
+      "group": "normal",
+      "seed": 20003,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 3.018490413771077,
+              "y_lo": 0.4216458692855597,
+              "x_hi": 3.996529294644332,
+              "y_hi": 1.4521343764164456
+            },
+            {
+              "x_lo": 0.6024598178114003,
+              "y_lo": 1.0363326186795485,
+              "x_hi": 1.4308130709999562,
+              "y_hi": 2.041588775403814
+            }
+          ],
+          "spawn": [
+            -1.0267705917358398,
+            -4.582381248474121,
+            3.0881547927856445
+          ],
+          "goal": [
+            3.8113043308258057,
+            -2.8015995025634766
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -1.4940236806869507,
+              -0.8515157699584961
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -1.4940236806869507,
+              -0.8515157699584961
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -3.3276727199554443,
+              -1.1606121063232422
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -3.3276727199554443,
+              -1.1606121063232422
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            3.8113043308258057,
+            -2.8015995025634766
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "normal_4",
+      "group": "normal",
+      "seed": 20004,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": -5.142695861542095,
+              "y_lo": 0.5605166742281336,
+              "x_hi": -3.9202290300156912,
+              "y_hi": 1.7733150017713424
+            },
+            {
+              "x_lo": -0.26056537904861127,
+              "y_lo": -1.4609572088989395,
+              "x_hi": 0.9346454803599238,
+              "y_hi": -0.29108984227770307
+            }
+          ],
+          "spawn": [
+            -5.098144054412842,
+            -3.7790353298187256,
+            -1.7739770412445068
+          ],
+          "goal": [
+            0.306333065032959,
+            1.2443938255310059
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              2.6772565841674805,
+              2.8946950435638428
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              2.6772565841674805,
+              2.8946950435638428
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -2.766904830932617,
+              -1.4388785362243652
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -2.766904830932617,
+              -1.4388785362243652
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            0.306333065032959,
+            1.2443938255310059
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "normal_5",
+      "group": "normal",
+      "seed": 20005,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 3.4799377750460154,
+              "y_lo": 1.3828267970784602,
+              "x_hi": 4.487136988929791,
+              "y_hi": 2.315930877201965
+            },
+            {
+              "x_lo": -4.108024653689405,
+              "y_lo": -0.9528866408337546,
+              "x_hi": -2.848147839745323,
+              "y_hi": 0.2909704423606352
+            }
+          ],
+          "spawn": [
+            5.40878963470459,
+            4.863457202911377,
+            0.21270470321178436
+          ],
+          "goal": [
+            -0.7833400368690491,
+            -4.40172815322876
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -1.1368095874786377,
+              -2.0444750785827637
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -1.1368095874786377,
+              -2.0444750785827637
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              1.9584909677505493,
+              1.762249231338501
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              1.9584909677505493,
+              1.762249231338501
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            -0.7833400368690491,
+            -4.40172815322876
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "dynamic_1",
+      "group": "dynamic",
+      "seed": 20001,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 4.153697797062336,
+              "y_lo": -1.4571664104026167,
+              "x_hi": 4.909048648643009,
+              "y_hi": -0.12142760798910301
+            },
+            {
+              "x_lo": 0.07133898058835786,
+              "y_lo": 3.688938758070664,
+              "x_hi": 1.226207748820212,
+              "y_hi": 4.65812526316301
+            }
+          ],
+          "spawn": [
+            1.8463808298110962,
+            1.404921054840088,
+            -3.109769344329834
+          ],
+          "goal": [
+            3.3564071655273438,
+            -5.369410514831543
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [
+          {
+            "id": "dynamic_0",
+            "pos": [
+              3.5050907135009766,
+              0.474322110414505
+            ],
+            "theta": 1.3003284667454014,
+            "goal": [
+              3.887826919555664,
+              -4.012893199920654
+            ]
+          }
+        ],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -4.221951961517334,
+              2.8878002166748047
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -4.221951961517334,
+              2.8878002166748047
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              0.6721423864364624,
+              -1.602465271949768
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              0.6721423864364624,
+              -1.602465271949768
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              1.7584863901138306,
+              3.1513659954071045
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            3.3564071655273438,
+            -4.800000190734863
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "dynamic_2",
+      "group": "dynamic",
+      "seed": 20002,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 1.9729271017933623,
+              "y_lo": -4.432385191398383,
+              "x_hi": 3.300256326605333,
+              "y_hi": -3.7149458445646224
+            },
+            {
+              "x_lo": 1.5146349922477786,
+              "y_lo": 1.8714011560424568,
+              "x_hi": 2.306662945199473,
+              "y_hi": 2.95539717210431
+            }
+          ],
+          "spawn": [
+            4.932585716247559,
+            4.2979960441589355,
+            -1.9958020448684692
+          ],
+          "goal": [
+            -2.605036497116089,
+            3.269683361053467
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [
+          {
+            "id": "dynamic_0",
+            "pos": [
+              0.8962911367416382,
+              2.9830663204193115
+            ],
+            "theta": 1.4852562287199182,
+            "goal": [
+              -3.762868642807007,
+              -1.1096874475479126
+            ]
+          },
+          {
+            "id": "dynamic_1",
+            "pos": [
+              3.414304494857788,
+              0.4165603816509247
+            ],
+            "theta": 1.1155139532006453,
+            "goal": [
+              0.5756869316101074,
+              4.062742710113525
+            ]
+          }
+        ],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -3.772657632827759,
+              -0.1960487961769104
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -3.772657632827759,
+              -0.1960487961769104
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -0.9977006912231445,
+              2.3165814876556396
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -0.9977006912231445,
+              2.3165814876556396
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              2.3954296112060547,
+              0.3745221793651581
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            -2.605036497116089,
+            3.269683361053467
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "dynamic_3",
+      "group": "dynamic",
+      "seed": 20003,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 3.018490413771077,
+              "y_lo": 0.4216458692855597,
+              "x_hi": 3.996529294644332,
+              "y_hi": 1.4521343764164456
+            },
+            {
+              "x_lo": 0.6024598178114003,
+              "y_lo": 1.0363326186795485,
+              "x_hi": 1.4308130709999562,
+              "y_hi": 2.041588775403814
+            }
+          ],
+          "spawn": [
+            -1.0267705917358398,
+            -4.582381248474121,
+            3.0881547927856445
+          ],
+          "goal": [
+            3.8113043308258057,
+            -2.8015995025634766
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [
+          {
+            "id": "dynamic_0",
+            "pos": [
+              2.5088114738464355,
+              4.591914176940918
+            ],
+            "theta": 2.744297690250566,
+            "goal": [
+              3.006145477294922,
+              -5.436172962188721
+            ]
+          }
+        ],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -1.4940236806869507,
+              -0.8515157699584961
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -1.4940236806869507,
+              -0.8515157699584961
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -3.3276727199554443,
+              -1.1606121063232422
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -3.3276727199554443,
+              -1.1606121063232422
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              4.816652297973633,
+              2.2556285858154297
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            3.8113043308258057,
+            -2.8015995025634766
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "dynamic_4",
+      "group": "dynamic",
+      "seed": 20004,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": -5.142695861542095,
+              "y_lo": 0.5605166742281336,
+              "x_hi": -3.9202290300156912,
+              "y_hi": 1.7733150017713424
+            },
+            {
+              "x_lo": -0.26056537904861127,
+              "y_lo": -1.4609572088989395,
+              "x_hi": 0.9346454803599238,
+              "y_hi": -0.29108984227770307
+            }
+          ],
+          "spawn": [
+            -5.098144054412842,
+            -3.7790353298187256,
+            -1.7739770412445068
+          ],
+          "goal": [
+            0.306333065032959,
+            1.2443938255310059
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [
+          {
+            "id": "dynamic_0",
+            "pos": [
+              -1.600385308265686,
+              3.5380544662475586
+            ],
+            "theta": 0.17537272825233657,
+            "goal": [
+              3.082646608352661,
+              -2.6556925773620605
+            ]
+          },
+          {
+            "id": "dynamic_1",
+            "pos": [
+              -4.385921955108643,
+              3.237213611602783
+            ],
+            "theta": -1.0767442184097558,
+            "goal": [
+              4.505599498748779,
+              -4.316605091094971
+            ]
+          }
+        ],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              2.6772565841674805,
+              2.8946950435638428
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              2.6772565841674805,
+              2.8946950435638428
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              -2.766904830932617,
+              -1.4388785362243652
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -2.766904830932617,
+              -1.4388785362243652
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              -2.3876869678497314,
+              0.27353209257125854
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            0.306333065032959,
+            1.2443938255310059
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    },
+    {
+      "id": "dynamic_5",
+      "group": "dynamic",
+      "seed": 20005,
+      "max_steps": 700,
+      "scenario": {
+        "map": {
+          "name": "random",
+          "world_size": 12.0,
+          "walls": [
+            {
+              "x_lo": 3.4799377750460154,
+              "y_lo": 1.3828267970784602,
+              "x_hi": 4.487136988929791,
+              "y_hi": 2.315930877201965
+            },
+            {
+              "x_lo": -4.108024653689405,
+              "y_lo": -0.9528866408337546,
+              "x_hi": -2.848147839745323,
+              "y_hi": 0.2909704423606352
+            }
+          ],
+          "spawn": [
+            5.40878963470459,
+            4.863457202911377,
+            0.21270470321178436
+          ],
+          "goal": [
+            -0.7833400368690491,
+            -4.40172815322876
+          ],
+          "elements": [],
+          "meta": {
+            "generated": true,
+            "obstacle_count": 2,
+            "path_checked": true,
+            "path_check_resolution": 0.2
+          }
+        },
+        "dynamic_agents": [
+          {
+            "id": "dynamic_0",
+            "pos": [
+              0.5509470701217651,
+              3.4334967136383057
+            ],
+            "theta": 2.9212256728912367,
+            "goal": [
+              -0.4088374674320221,
+              1.587563395500183
+            ]
+          }
+        ],
+        "boxes": [
+          {
+            "id": "box_0",
+            "pos": [
+              -1.1368095874786377,
+              -2.0444750785827637
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              -1.1368095874786377,
+              -2.0444750785827637
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_1",
+            "pos": [
+              1.9584909677505493,
+              1.762249231338501
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              1.9584909677505493,
+              1.762249231338501
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_2",
+            "pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 0,
+            "source_pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.0,
+            "theta": 0.0
+          },
+          {
+            "id": "box_3",
+            "pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "width": 0.8,
+            "depth": 0.8,
+            "height": 0.6,
+            "stack_level": 1,
+            "source_pos": [
+              0.3317594528198242,
+              0.49534690380096436
+            ],
+            "picked": false,
+            "carried": false,
+            "delivered": false,
+            "goal_level": -1,
+            "z": 0.6,
+            "theta": 0.0
+          }
+        ],
+        "goal_area": {
+          "center": [
+            -0.7833400368690491,
+            -4.40172815322876
+          ],
+          "size": [
+            2.4000000953674316,
+            2.4000000953674316
+          ]
+        }
+      }
+    }
+  ]
+}

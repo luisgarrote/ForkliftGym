@@ -22,7 +22,7 @@ Install directly from GitHub:
 python -m pip install "forklift-gym @ git+https://github.com/luisgarrote/ForkliftGym.git"
 ```
 
-For Stable-Baselines3 PPO and the training commands:
+For Stable-Baselines3 and the student examples:
 
 ```sh
 python -m pip install "forklift-gym[sb3] @ git+https://github.com/luisgarrote/ForkliftGym.git"
@@ -64,11 +64,9 @@ env.close()
 Render a seeded starting frame without installing SB3:
 
 ```sh
-forklift-lab frame --output outputs/forklift.png
-forklift-lab frame --traffic 2 --obstacles 2 --output outputs/traffic.png
+python examples/random_rollout.py --steps 0 --output outputs/forklift.png
+python examples/random_rollout.py --steps 0 --traffic 2 --obstacles 2 --output outputs/traffic.png
 ```
-
-You can also use `python -m forklift_gym` wherever the guide uses `forklift-lab`.
 
 ## Moving agents and obstacles
 
@@ -91,62 +89,121 @@ within a scene are different from independent vectorized environment copies.
 
 ![Moving traffic, with stationary forklift](docs/images/traffic.gif)
 
-## Train PPO
+## Student workflow with Stable-Baselines3
+
+The examples use SB3 directly: `PPO(...).learn(...)`, `model.save(...)` and
+`PPO.load(...)`. Start with [examples/quickstart.ipynb](examples/quickstart.ipynb)
+or the short [training script](examples/train_ppo.py). Run these commands from
+the cloned repository after installing `.[sb3]`.
 
 ```sh
-forklift-lab train --steps 100000 --output outputs/fixed_seed0
-forklift-lab train --randomize --num-boxes 4 --steps 100000 --output outputs/random_seed0
-forklift-lab train --traffic 2 --obstacles 2 --steps 300000 --output outputs/traffic_seed0
+# 1. Train and save a model, configuration, episode log and reward graph.
+python examples/train_ppo.py --steps 100000 --seed 0 --output outputs/ppo_seed0
+# 2. Recreate the graph from the saved episode log at any time.
+python examples/plot_rewards.py --log outputs/ppo_seed0/training.monitor.csv --output outputs/ppo_seed0/rewards.png
+# 3. Load the saved model and run one fixed scenario.
+python examples/run_model.py --run outputs/ppo_seed0 --case normal_1
+# 4. Evaluate all ten fixed cases and retain every result, including failures.
+python examples/evaluate.py --run outputs/ppo_seed0
+# 5. Record one complete episode as MP4.
+python examples/record_video.py --run outputs/ppo_seed0 --case normal_1 --output outputs/ppo_seed0/demo.mp4
 ```
 
-Defaults: four vector environments, four-frame history (176 input values), an MLP
-policy, observation/reward normalization and CPU execution. Fixed training uses
-the four-pallet warehouse, including a two-pallet source stack. `--randomize`
-samples pallet layouts; traffic/obstacle settings sample scenes on reset. Budgets
-are starting points, not success guarantees. Each run needs a new output folder.
+The budget above is an example, not a promise of a successful policy. Each training
+run needs a new output directory. Change `--seed` and `--output` for independent
+training runs; report results across training seeds. The examples use one
+`DummyVecEnv` environment and CPU execution to keep the code readable.
 
-Saved artifacts:
+### Episode returns: raw and last 100 episodes
 
-- `model.zip`: PPO policy.
-- `vecnormalize.pkl`: matching normalization statistics.
-- `config.json`: seed, task settings, history, timestep count and package versions.
-- `monitor/worker*.monitor.csv`: raw training episode returns and lengths.
-
-Keep the model, statistics and configuration together. Defaults use sequential
-`DummyVecEnv`. To run independent simulators in processes, add `--vec-env subproc`;
-start with a small worker count and measure throughput on the available hardware.
-For fair comparisons, count total transitions across all copies.
-
-## Evaluate
-
-```sh
-forklift-lab evaluate --run outputs/traffic_seed0 --episodes 20 --seed 10000
-```
-
-Evaluation reloads scenario settings, history and normalization, freezes statistic
-updates, and uses deterministic actions. It saves every episode's raw return,
-success, steps, contact-step count, pickup/delivery events and number of pallets
-delivered. It also reports success rate and mean return. Use the same held-out
-scenario seeds across methods and retain failed episodes. Fixed scenes can reset
-to identical states across seeds; use generated layouts to measure generalization.
-
-## Direct SB3 usage
+`Monitor` saves the **sum of rewards per completed episode**, before any reward
+normalization, in `training.monitor.csv`. [plot_rewards.py](examples/plot_rewards.py)
+uses Python's `csv` module, NumPy and Matplotlib; no pandas or dashboard is needed.
+The essential calculation is:
 
 ```python
-from stable_baselines3 import PPO
-from stable_baselines3.common.monitor import Monitor
-from forklift_gym import ForkliftEnv
-
-env = Monitor(ForkliftEnv())
-model = PPO("MlpPolicy", env, verbose=1, device="cpu", seed=0)
-model.learn(total_timesteps=100_000)
-model.save("forklift_ppo")
-env.close()
+# rewards[i] is the total reward of episode i, in chronological order.
+average = np.array([
+    rewards[max(0, i - 99):i + 1].mean() for i in range(len(rewards))
+])
+plt.plot(rewards, alpha=0.45, label="Raw episode return")
+plt.plot(average, label="Mean of last 100 episodes")
+plt.xlabel("Completed episode")
+plt.ylabel("Total reward")
+plt.legend()
 ```
 
-This minimal example uses SB3 defaults. The CLI adds normalization, history,
-saved configuration and an evaluation pipeline. DQN needs an explicit discrete
-action wrapper; PPO, A2C, TD3 and DDPG can consume the native continuous actions.
+Before 100 episodes exist, the mean uses all available completed episodes.
+`rewards.png` contains both curves; `rewards.csv` contains their numerical values (see the [example data](docs/example_rewards.csv)).
+An unfinished final episode is not included. Training logs are separate from the
+held-out evaluation results.
+
+![Raw episode returns and trailing 100-episode mean](docs/images/reward_curve.png)
+
+This example graph comes from a **2,048-transition integration check with a
+16-step episode cap**, not a trained benchmark result. Use the normal episode
+horizon for your experiments.
+
+### Saved model, evaluation statistics and video
+
+Keep `model.zip` and `config.json` together. The run/evaluation/video scripts
+restore the same observation history. SB3 chooses deterministic actions for these
+scripts. Training uses raw rewards and does not apply `VecNormalize`.
+
+`evaluate.py` writes `evaluation.csv` and `evaluation.json` inside the run folder:
+all ten episode returns, lengths, success and termination/truncation flags, plus
+**mean return, population standard deviation and success rate for each group**.
+Task-specific columns include contact steps and, for the forklift, pickup events,
+delivery events and pallets delivered. CarRacing contact steps count the reported
+static-obstacle collision flag only. Failed episodes are retained.
+
+[record_video.py](examples/record_video.py) captures the initial frame and every
+simulation step, including the final frame, without action/frame skipping. Frames
+are streamed to MP4, with the longer side limited to 640 pixels. The accompanying
+JSON records the case, return, success and frame rate. Video uses simulation time;
+it does not affect policy observations. Video encoding dependencies are included
+in `.[sb3]`.
+
+`--max-steps 16` is available for quick integration checks in all scripts; it
+changes the task horizon. Shortened evaluation files are named
+`evaluation_short_16.*` and must not be reported as benchmark scores.
+
+### Forklift training settings and fixed evaluation scenarios
+
+Training defaults to the four-pallet warehouse, including a two-pallet source
+stack. The policy is `MlpPolicy` with one 44-value observation. To sample pallet
+layouts during training, add `--randomize`. To sample warehouses with traffic:
+
+```sh
+python examples/train_ppo.py --traffic 2 --obstacles 2 --steps 300000 --seed 0 --output outputs/traffic_seed0
+python examples/run_model.py --run outputs/traffic_seed0 --case dynamic_1
+python examples/record_video.py --run outputs/traffic_seed0 --case dynamic_2 --output outputs/traffic_seed0/dynamic.mp4
+```
+
+Optional `--history 4` stacks four observations; the saved configuration restores
+this automatically. PPO, A2C, TD3 and DDPG accept the native continuous actions.
+DQN needs an explicit discrete-action wrapper. The provided demo uses PPO; change
+the algorithm and corresponding load calls for your assignment comparisons.
+
+[evaluation_cases.json](examples/evaluation_cases.json) stores the complete map,
+spawn, four pallets, stack levels, delivery rectangle and traffic initial states.
+These are explicit scene files, not new random scenes sampled at evaluation time.
+Each normal case has two static obstacles and a matching traffic version:
+
+| Normal case | Traffic case | Reset seed | Moving agents | Step cap |
+|---|---|---:|---:|---:|
+| `normal_1` | `dynamic_1` | 20001 | 1 | 700 |
+| `normal_2` | `dynamic_2` | 20002 | 2 | 700 |
+| `normal_3` | `dynamic_3` | 20003 | 1 | 700 |
+| `normal_4` | `dynamic_4` | 20004 | 2 | 700 |
+| `normal_5` | `dynamic_5` | 20005 | 1 | 700 |
+
+The five normal cases have no moving agents. Within each pair, geometry, pallets,
+spawn and destination are identical; only scripted traffic is added. Controllers
+continue moving and select new waypoints. Success means delivering all four
+pallets. Use exactly these ten cases for every method, and keep them out of
+training and hyperparameter selection. Create separate scenarios/seeds for
+validation. Record the repository revision and case manifest with your results.
 
 ## Observation, action, reward and task
 
@@ -225,6 +282,7 @@ python -m pip wheel . --no-deps -w dist
 
 The CI workflow tests environment contracts, deterministic resets, pickup/delivery,
 stacking, oriented loads, traffic movement and installed-wheel resources. Its SB3
-job checks short training and checkpoint reload. Short checks validate integration,
+job checks direct training, checkpoint reload, reward plotting, all ten fixed
+evaluation cases and MP4 recording. Short checks validate integration,
 not policy quality. Source and environments are adapted from the course's
 `mobile_robot_gym` forklift implementation.

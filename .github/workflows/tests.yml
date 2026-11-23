@@ -36,6 +36,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install ".[sb3]"
-      - run: forklift-lab train --steps 128 --envs 2 --rollout 32 --batch-size 32 --traffic 2 --obstacles 2 --max-steps 16 --output outputs/ci
-      - run: forklift-lab evaluate --run outputs/ci --episodes 2
-      - run: forklift-lab train --steps 64 --envs 2 --vec-env subproc --rollout 32 --batch-size 32 --max-steps 16 --output outputs/subproc
+      - run: python examples/train_ppo.py --steps 128 --rollout 64 --batch-size 32 --epochs 1 --traffic 2 --obstacles 2 --max-steps 16 --output outputs/ci
+      - run: python examples/plot_rewards.py --log outputs/ci/training.monitor.csv --output outputs/ci/replotted.png
+      - run: python examples/run_model.py --run outputs/ci --case normal_1 --max-steps 8
+      - run: python examples/evaluate.py --run outputs/ci --max-steps 8
+      - run: python examples/record_video.py --run outputs/ci --case dynamic_2 --max-steps 8 --output outputs/ci/demo.mp4
