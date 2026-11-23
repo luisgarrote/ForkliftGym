@@ -1,0 +1,61 @@
+{
+  "controller": "scripted",
+  "scenario": "default_four_pallet_warehouse",
+  "seed": 7,
+  "dt": 0.08,
+  "steps": 532,
+  "delivered": 4,
+  "total_pallets": 4,
+  "events": [
+    {
+      "step": 47,
+      "time_seconds": 3.76,
+      "picked_box": "box_2",
+      "delivered_box": null
+    },
+    {
+      "step": 159,
+      "time_seconds": 12.72,
+      "picked_box": null,
+      "delivered_box": "box_2"
+    },
+    {
+      "step": 177,
+      "time_seconds": 14.16,
+      "picked_box": "box_3",
+      "delivered_box": null
+    },
+    {
+      "step": 202,
+      "time_seconds": 16.16,
+      "picked_box": null,
+      "delivered_box": "box_3"
+    },
+    {
+      "step": 328,
+      "time_seconds": 26.24,
+      "picked_box": "box_1",
+      "delivered_box": null
+    },
+    {
+      "step": 412,
+      "time_seconds": 32.96,
+      "picked_box": null,
+      "delivered_box": "box_1"
+    },
+    {
+      "step": 465,
+      "time_seconds": 37.2,
+      "picked_box": "box_0",
+      "delivered_box": null
+    },
+    {
+      "step": 532,
+      "time_seconds": 42.56,
+      "picked_box": null,
+      "delivered_box": "box_0"
+    }
+  ],
+  "frame_stride": 3,
+  "normal_playback_speed": 2
+}

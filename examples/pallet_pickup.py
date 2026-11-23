@@ -12,30 +12,87 @@ from PIL import Image
 from forklift_gym import ForkliftEnv
 
 
-def control(env):
-    if env.holding_box:
-        box = env.carried_box
-        if env._goal_contains(box.pos, box):
-            return np.array([0,0,-1], dtype=np.float32), 'Lower and deliver'
-        if env.fork_height < .9:
-            return np.array([0,0,1], dtype=np.float32), 'Lift the pallet'
-        phase = 'Carry to the delivery area'
-    else:
-        if env.fork_height > .05:
-            return np.array([0,0,-1], dtype=np.float32), 'Lower the forks'
-        phase = 'Approach the next pallet'
-    delta = env.goal-env.pos
+def steer_to(env, point, tolerance=.05):
+    delta = np.asarray(point)-env.pos
     distance = float(np.linalg.norm(delta))
+    if distance < tolerance:
+        return np.zeros(3, dtype=np.float32), True
     error = (math.atan2(float(delta[1]),float(delta[0]))-env.theta+math.pi)%(2*math.pi)-math.pi
     turn = np.clip(2.5*error/env.max_angular_speed,-1,1)
-    drive = min(.65,.5*distance) if abs(error)<.45 else 0.0
-    return np.array([drive,turn,0], dtype=np.float32), phase
+    drive = min(.75,.9*distance) if abs(error)<.45 else 0.0
+    return np.array([drive,turn,0], dtype=np.float32), False
+
+
+class DemoController:
+    """A deterministic demo for the default four-pallet warehouse.
+
+    Engage the source stack from its side and leave it straight before turning,
+    keeping the attached OBB clear of the lower pallet. Only step actions move
+    the forklift; there are no teleports or manual pickup/delivery calls.
+    """
+    def __init__(self):
+        self.stack_id = None
+        self.phase = None
+        self.approach = None
+        self.depart = None
+        self.route_box = None
+        self.route = []
+
+    def __call__(self, env):
+        if env.holding_box:
+            box = env.carried_box
+            if env._goal_contains(box.pos, box):
+                return np.array([0,0,-1], dtype=np.float32), 'Lower and deliver'
+            if env.fork_height < .9:
+                return np.array([0,0,1], dtype=np.float32), 'Lift the pallet'
+            if box.id == self.stack_id and self.phase != 'departed':
+                action, reached = steer_to(env,self.depart,tolerance=.06)
+                if not reached:
+                    return action, 'Carry the top pallet clear of its source stack'
+                self.phase = 'departed'
+            if self.route_box != box.id:
+                self.route_box = box.id
+                # Pass north of the still-uncollected box_3 on the first trip.
+                self.route = [np.array([0,3.8],dtype=np.float32)] if box.id == 'box_2' else []
+            if self.route:
+                action, reached = steer_to(env,self.route[0],tolerance=.08)
+                if not reached:
+                    return action, 'Carry around the other source pallets'
+                self.route.pop(0)
+            return steer_to(env,env.goal)[0], 'Carry to the delivery area'
+
+        target = env.get_box(env.target_box_id)
+        stack = [b for b in env.boxes if not b.delivered and not b.carried
+                 and np.linalg.norm(b.source_pos-target.source_pos)<.05]
+        if len(stack)>1:
+            if self.stack_id != target.id:
+                self.stack_id = target.id
+                self.phase = 'approach'
+                self.approach = target.pos+np.array([.89,-.75],dtype=np.float32)
+                self.depart = self.approach+np.array([0,1.2],dtype=np.float32)
+            if self.phase == 'approach':
+                # Raised forks prevent early automatic engagement while aligning.
+                if env.fork_height < .4:
+                    return np.array([0,0,1],dtype=np.float32), 'Prepare the source-stack approach'
+                action, reached = steer_to(env,self.approach,tolerance=.003)
+                if not reached:
+                    return action, 'Approach the top pallet from the side'
+                self.phase = 'align'
+            if self.phase == 'align':
+                error = (math.pi/2-env.theta+math.pi)%(2*math.pi)-math.pi
+                if abs(error)>.015:
+                    return np.array([0,np.clip(2.5*error/env.max_angular_speed,-1,1),0],dtype=np.float32), 'Align the forks beside the source stack'
+                self.phase = 'engage'
+            return np.array([0,0,-1],dtype=np.float32), 'Catch the top source pallet'
+        if env.fork_height > .05:
+            return np.array([0,0,-1], dtype=np.float32), 'Lower the forks'
+        return steer_to(env,env.goal)[0], 'Approach the next pallet'
 
 
 def render(env, phase, width):
     env.render()
     fig = env._last_fig
-    fig.axes[0].set_title(f'{phase} | Delivered {env.delivered_count}/2', fontsize=11)
+    fig.axes[0].set_title(f'{phase} | Delivered {env.delivered_count}/{len(env.boxes)}', fontsize=11)
     fig.canvas.draw()
     rgb = np.asarray(fig.canvas.buffer_rgba())[:,:,:3].copy()
     frame = Image.fromarray(rgb)
@@ -46,22 +103,21 @@ def render(env, phase, width):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', default='outputs/pallet_pickup.gif')
-    parser.add_argument('--max-steps', type=int, default=800)
+    parser.add_argument('--max-steps', type=int, default=1600)
     parser.add_argument('--frame-stride', type=int, default=3)
     parser.add_argument('--width', type=int, default=640)
     args = parser.parse_args()
     if min(args.max_steps,args.frame_stride,args.width)<1:
         parser.error('counts and width must be positive')
-    env = ForkliftEnv(render_mode='rgb_array', spawn=[-4,-1.4,0],
-                      boxes=[{'id':'pallet_A','pos':[-1.8,-1.4]},
-                             {'id':'pallet_B','pos':[-1.8,1.4]}],
-                      goal_area={'center':[3,2],'size':[2.4,2.4]},max_steps=args.max_steps)
+    env = ForkliftEnv(render_mode='rgb_array', max_steps=args.max_steps)
     frames=[];durations=[];events=[]
     try:
         env.reset(seed=7)
+        controller = DemoController()
+        total = len(env.boxes)
         frames.append(render(env,'Approach the first pallet',args.width));durations.append(500)
         for step in range(1,args.max_steps+1):
-            action, phase = control(env)
+            action, phase = controller(env)
             _, _, terminated, truncated, info = env.step(action)
             event = info['picked_box'] is not None or info['delivered_box'] is not None
             if event:
@@ -74,13 +130,13 @@ def main():
                 durations.append(600 if event else round(1000*env.dt*args.frame_stride/2))
             if terminated or truncated:
                 break
-        if env.delivered_count!=2:
-            raise RuntimeError(f'Demonstration incomplete after {step} steps: {env.delivered_count}/2 delivered')
-        frames.append(render(env,'Both pallets delivered and stacked',args.width));durations.append(1500)
+        if env.delivered_count!=total:
+            raise RuntimeError(f'Demonstration incomplete after {step} steps: {env.delivered_count}/{len(env.boxes)} delivered')
+        frames.append(render(env,'All four pallets delivered and stacked',args.width));durations.append(1500)
         target=Path(args.output);target.parent.mkdir(parents=True,exist_ok=True)
         frames[0].save(target,save_all=True,append_images=frames[1:],duration=durations,loop=0)
-        metadata={'controller':'scripted','seed':7,'dt':env.dt,'steps':step,
-                  'delivered':env.delivered_count,'events':events,
+        metadata={'controller':'scripted','scenario':'default_four_pallet_warehouse','seed':7,'dt':env.dt,'steps':step,
+                  'delivered':env.delivered_count,'total_pallets':total,'events':events,
                   'frame_stride':args.frame_stride,'normal_playback_speed':2}
         target.with_suffix('.json').write_text(json.dumps(metadata,indent=2)+'\n')
         print(json.dumps(metadata,indent=2))

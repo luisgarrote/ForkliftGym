@@ -4,11 +4,11 @@ A lightweight **Gymnasium forklift environment** for reinforcement-learning clas
 Drive, steer, lift pallets, carry them to a delivery area, and stack them. Includes
 oriented pallets, source stacks, shelves, lidar, and optional moving robot traffic.
 
-![Forklift picks up, carries and stacks two pallets](docs/images/pallet_pickup.gif)
+![Forklift picks up, carries and stacks all four pallets](docs/images/pallet_pickup_4.gif)
 
 Scripted demonstration recorded from the simulator: approach, catch, lift, carry,
-lower and stack two pallets. Playback is accelerated 2x, with pauses at pickup and
-delivery. This illustrates the environment mechanics; it is not a trained PPO policy.
+lower and stack all four default pallets, including both levels of the source stack.
+Playback is accelerated 2x, with pauses at pickup and delivery. This illustrates the environment mechanics; it is not a trained PPO policy.
 
 ## Installation
 
