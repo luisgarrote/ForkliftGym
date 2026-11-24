@@ -8,11 +8,21 @@ from forklift_gym import SB3ForkliftEnv, load_scenario
 
 class FixedScenarioTests(unittest.TestCase):
     def test_five_normal_and_five_matched_traffic_cases(self):
-        manifest = Path(__file__).resolve().parents[1] / 'examples/evaluation_cases.json'
+        self.check_pairs("evaluation_cases.json", "")
+
+    def test_validation_pairs_are_separate_from_final_tests(self):
+        self.check_pairs("validation_cases.json", "val_")
+        examples = Path(__file__).resolve().parents[1] / "examples"
+        validation = json.loads((examples/"validation_cases.json").read_text())["cases"]
+        testing = json.loads((examples/"evaluation_cases.json").read_text())["cases"]
+        self.assertFalse({case["seed"] for case in validation} & {case["seed"] for case in testing})
+
+    def check_pairs(self, filename, prefix):
+        manifest = Path(__file__).resolve().parents[1] / "examples" / filename
         cases = {case['id']: case for case in json.loads(manifest.read_text())['cases']}
         self.assertEqual(len(cases), 10)
         for i in range(1, 6):
-            normal, dynamic = cases[f'normal_{i}'], cases[f'dynamic_{i}']
+            normal, dynamic = cases[f'{prefix}normal_{i}'], cases[f'{prefix}dynamic_{i}']
             a, b = normal['scenario'], dynamic['scenario']
             self.assertEqual(normal['seed'], dynamic['seed'])
             self.assertEqual(normal['max_steps'], 700)
