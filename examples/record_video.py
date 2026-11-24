@@ -6,6 +6,7 @@ import gymnasium as gym
 import imageio.v2 as imageio
 import torch
 from PIL import Image
+from action_repeat import ActionRepeat
 from stable_baselines3 import PPO
 from env_utils import make_env, prepare_env, get_case, episode, VIDEO_FPS
 
@@ -49,7 +50,8 @@ def main():
     output = Path(args.output); output.parent.mkdir(parents=True,exist_ok=True)
     with imageio.get_writer(str(output),fps=VIDEO_FPS,codec="libx264",macro_block_size=1) as writer:
         raw = make_env(case,max_steps=args.max_steps)
-        env = prepare_env(VideoFrames(raw,writer),config["history"])
+        recorded = ActionRepeat(VideoFrames(raw,writer), config.get("action_repeat", 1))
+        env = prepare_env(recorded,config["history"])
         try:
             model = PPO.load(str(run/"model.zip"),env=env,device="cpu")
             metrics = episode(model,env,case["seed"])

@@ -93,6 +93,10 @@ within a scene are different from independent vectorized environment copies.
 
 ## Student workflow with Stable-Baselines3
 
+The Colab setup installs the simulator into the running kernel and adds the
+cloned source directory to its import path, so no kernel restart is needed to
+import it. Existing checkouts are updated with a non-destructive fast-forward pull.
+
 The **Colab demo notebook** installs its dependencies and trains PPO for **500
 completed training episodes**. It displays raw total reward per episode and the
 mean of the last 100 episodes, selects `best_model.zip` using a separate **5+5 validation suite**
@@ -204,8 +208,11 @@ python examples/run_model.py --run outputs/traffic_seed0 --case dynamic_1
 python examples/record_video.py --run outputs/traffic_seed0 --case dynamic_2 --output outputs/traffic_seed0/dynamic.mp4
 ```
 
-Optional `--history 4` stacks four observations; the saved configuration restores
-this automatically. PPO, A2C, TD3 and DDPG accept the native continuous actions.
+Both `--history` and `--action-repeat` default to **1**. Students must investigate
+and justify these settings. History stacks recent decision-time observations;
+action repetition holds a control for multiple physics frames and sums their
+rewards, stopping at episode boundaries. The saved configuration restores both
+settings for evaluation and video. PPO, A2C, TD3 and DDPG accept the native continuous actions.
 DQN needs an explicit discrete-action wrapper. The provided demo uses PPO; change
 the algorithm and corresponding load calls for your assignment comparisons.
 

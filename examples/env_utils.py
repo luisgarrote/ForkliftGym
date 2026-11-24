@@ -5,6 +5,7 @@ import json
 import gymnasium as gym
 import numpy as np
 from stable_baselines3.common.vec_env import DummyVecEnv, VecFrameStack
+from action_repeat import ActionRepeat
 
 CASES_PATH = Path(__file__).with_name("evaluation_cases.json")
 
@@ -25,19 +26,20 @@ def episode(model, env, seed):
     """SB3 VecEnv auto-resets; collect the ending info before the next episode."""
     env.seed(seed)
     obs = env.reset()
-    total, length, contacts, pickups, deliveries = 0.0, 0, 0, 0, 0
+    total, length, contacts, pickups, deliveries, frames = 0.0, 0, 0, 0, 0, 0
     while True:
         action, _ = model.predict(obs, deterministic=True)
         obs, rewards, dones, infos = env.step(action)
         info = infos[0]
         total += float(rewards[0])
         length += 1
+        frames += int(info.get("simulator_frames", 1))
         contacts += int(bool(info.get("collision", info.get("collision_static", False))))
         pickups += int(info.get("picked_box") is not None)
         deliveries += int(info.get("delivered_box") is not None)
         if dones[0]:
             truncated = bool(info.get("TimeLimit.truncated", False))
-            return dict(seed=seed, episode_return=total, length=length,
+            return dict(seed=seed, episode_return=total, length=length, simulator_frames=frames,
                         success=bool(info.get("is_success", False)),
                         contact_steps=contacts, pallets_delivered=info.get("delivered_count"),
                         pickup_events=pickups, delivery_events=deliveries,
@@ -67,15 +69,17 @@ POLICY = "MlpPolicy"
 VIDEO_FPS = 12.5  # dt = 0.08 s
 
 
-def make_env(case=None, max_steps=None, traffic=0, obstacles=0, randomize=False):
+def make_env(case=None, max_steps=None, traffic=0, obstacles=0, randomize=False, action_repeat=1):
     if case is not None:
-        return SB3ForkliftEnv(scenario=load_scenario(case["scenario"]),
+        env = SB3ForkliftEnv(scenario=load_scenario(case["scenario"]),
                              max_steps=max_steps or case["max_steps"], render_mode="rgb_array")
-    if traffic or obstacles:
-        return SB3ForkliftEnv(num_dynamic_agents=traffic, obstacle_count=obstacles,
+    elif traffic or obstacles:
+        env = SB3ForkliftEnv(num_dynamic_agents=traffic, obstacle_count=obstacles,
                              num_boxes=4, max_steps=max_steps or 700, render_mode="rgb_array")
-    kwargs = {"num_boxes": 4} if randomize else {}
-    return ForkliftEnv(max_steps=max_steps or 700, render_mode="rgb_array", **kwargs)
+    else:
+        kwargs = {"num_boxes": 4} if randomize else {}
+        env = ForkliftEnv(max_steps=max_steps or 700, render_mode="rgb_array", **kwargs)
+    return ActionRepeat(env, action_repeat)
 
 
 def prepare_env(base, history=DEFAULT_HISTORY):

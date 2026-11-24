@@ -15,6 +15,7 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--output", default="outputs/ppo")
     parser.add_argument("--history", type=int, default=DEFAULT_HISTORY)
+    parser.add_argument("--action-repeat", type=int, default=1)
     parser.add_argument("--max-steps", type=int, default=None)
     parser.add_argument("--rollout", type=int, default=512)
     parser.add_argument("--batch-size", type=int, default=128)
@@ -23,7 +24,7 @@ def main():
     parser.add_argument("--traffic", type=int, default=0)
     parser.add_argument("--obstacles", type=int, default=0)
     args = parser.parse_args()
-    if min(args.steps,args.history,args.rollout,args.batch_size,args.epochs)<1 or min(args.traffic,args.obstacles)<0:
+    if min(args.steps,args.history,args.rollout,args.batch_size,args.epochs,args.action_repeat)<1 or min(args.traffic,args.obstacles)<0:
         parser.error("counts must be positive (traffic/obstacles may be zero)")
     if args.max_steps is not None and args.max_steps < 1:
         parser.error("--max-steps must be positive")
@@ -35,7 +36,7 @@ def main():
         parser.error("choose an empty output directory for this run")
     torch.set_num_threads(1)
     base = make_env(max_steps=args.max_steps, traffic=args.traffic,
-                    obstacles=args.obstacles, randomize=args.randomize)
+                    obstacles=args.obstacles, randomize=args.randomize, action_repeat=args.action_repeat)
     base = Monitor(base, filename=str(output/"training"))  # saves raw episode returns
     env = prepare_env(base, history=args.history)
     try:
