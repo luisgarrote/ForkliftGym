@@ -174,18 +174,7 @@ plt.xlabel("Completed episode")
 plt.ylabel("Total reward")
 plt.legend()
 ```
-
-Before 100 episodes exist, the mean uses all available completed episodes.
-`rewards.png` contains both curves; `rewards.csv` contains their numerical values (see the [example data](docs/example_rewards.csv)).
-An unfinished final episode is not included. Training logs are separate from the
-held-out evaluation results.
-
-![Raw episode returns and trailing 100-episode mean](docs/images/reward_curve.png)
-
-This example graph comes from a **2,048-transition integration check with a
-16-step episode cap**, not a trained benchmark result. Use the normal episode
-horizon for your experiments.
-
+ 
 ### Saved model, evaluation statistics and video
 
 Keep `model.zip` and `config.json` together. The run/evaluation/video scripts
