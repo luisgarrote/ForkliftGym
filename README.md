@@ -6,11 +6,22 @@ A lightweight **Gymnasium forklift environment** for reinforcement-learning clas
 Drive, steer, lift pallets, carry them to a delivery area, and stack them. Includes
 oriented pallets, source stacks, shelves, lidar, and optional moving robot traffic.
 
+[![PPO forklift moving pallets among traffic and obstacles](docs/images/ppo_traffic_preview.gif)](docs/media/forklift_ppo_traffic_top10.mp4)
+
+[Watch or download the full PPO video (MP4, 40.8 seconds)](docs/media/forklift_ppo_traffic_top10.mp4).
+The preview shows a trained PPO policy moving pallets with two moving agents and
+two static obstacles. The full clip contains ten selected rollouts.
+
+<details>
+<summary>Four-pallet pickup and stacking mechanics (scripted)</summary>
+
 ![Forklift picks up, carries and stacks all four pallets](docs/images/pallet_pickup_4.gif)
 
-Scripted demonstration recorded from the simulator: approach, catch, lift, carry,
-lower and stack all four default pallets, including both levels of the source stack.
-Playback is accelerated 2x, with pauses at pickup and delivery. This illustrates the environment mechanics; it is not a trained PPO policy.
+A scripted controller approaches, catches, lifts, carries, lowers and stacks all
+four default pallets, including both levels of the source stack. Playback is
+accelerated 2x, with pauses at pickup and delivery.
+
+</details>
 
 ## Installation
 
