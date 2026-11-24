@@ -41,3 +41,5 @@ jobs:
       - run: python examples/run_model.py --run outputs/ci --case normal_1 --max-steps 8
       - run: python examples/evaluate.py --run outputs/ci --max-steps 8
       - run: python examples/record_video.py --run outputs/ci --case dynamic_2 --max-steps 8 --output outputs/ci/demo.mp4
+      - run: python -m pip install nbformat nbclient ipykernel
+      - run: python examples/check_notebook.py

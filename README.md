@@ -1,5 +1,7 @@
 # ForkliftGym
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/luisgarrote/ForkliftGym/blob/main/examples/quickstart.ipynb)
+
 A lightweight **Gymnasium forklift environment** for reinforcement-learning classes.
 Drive, steer, lift pallets, carry them to a delivery area, and stack them. Includes
 oriented pallets, source stacks, shelves, lidar, and optional moving robot traffic.
@@ -90,6 +92,15 @@ within a scene are different from independent vectorized environment copies.
 ![Moving traffic, with stationary forklift](docs/images/traffic.gif)
 
 ## Student workflow with Stable-Baselines3
+
+The **Colab demo notebook** installs its dependencies and trains PPO for **500
+completed training episodes**. It displays raw total reward per episode and the
+mean of the last 100 episodes, selects `best_model.zip` using five separate
+validation seeds every 25 episodes, and embeds a video of that checkpoint.
+Validation episodes are additional to the 500 training episodes. Final testing
+uses the ten supplied cases only after model selection. The notebook includes
+an optional download of models, logs, graph, test statistics and MP4.
+
 
 The examples use SB3 directly: `PPO(...).learn(...)`, `model.save(...)` and
 `PPO.load(...)`. Start with [examples/quickstart.ipynb](examples/quickstart.ipynb)
