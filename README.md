@@ -116,6 +116,9 @@ Validation episodes are additional to the 500 training episodes. Final testing
 uses the ten supplied cases only after model selection. The notebook includes
 an optional download of models, logs, graph, test statistics and MP4.
 
+The notebook calls `ForkliftEnv` and `SB3ForkliftEnv` directly, lists the native
+motion, LiDAR, pallet-handling and reward parameters, and shows each SB3 wrapper
+in order. Environment construction is visible in training, validation and testing.
 
 [The validation manifest](examples/validation_cases.json) has five random
 four-pallet warehouses with two static obstacles, paired with the same five
