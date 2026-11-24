@@ -162,7 +162,7 @@ def main():
             sub.add_argument("--envs", type=positive, default=4)
             sub.add_argument("--vec-env", choices=("dummy", "subproc"), default="dummy")
             sub.add_argument("--threads", type=positive, default=1)
-            sub.add_argument("--history", type=positive, default=4)
+            sub.add_argument("--history", type=positive, default=1)
             sub.add_argument("--rollout", type=positive, default=512)
             sub.add_argument("--batch-size", type=positive, default=256)
     sub = commands.add_parser("evaluate")
